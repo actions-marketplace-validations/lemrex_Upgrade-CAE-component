@@ -34,6 +34,10 @@ inputs:
     description: "Enterprise Project ID (Optional)."
     required: false
     default: "0"
+  branch:
+    description: "Github branch"
+    required: true
+    default: "main"    
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -47,3 +51,4 @@ runs:
     SECRET_KEY: ${{ inputs.secretKey }}
     REGION: ${{ inputs.region }}
     EPI: ${{inputs.enterprise_project_id}}
+    BRANCH: ${{inputs.branch}}
