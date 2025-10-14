@@ -2,7 +2,7 @@
 set -e
 
 # Ensure required inputs are set
-if [[ -z "$PROJECT_ID" || -z "$ENVIRONMENT_NAME" || -z "$APP_NAME" || -z "$COMPONENT_NAME" || -z "$VERSION" || -z "$ACCESS_KEY" || -z "$SECRET_KEY" || -z "$REGION" ]]; then
+if [[ -z "$PROJECT_ID" || -z "$ENVIRONMENT_NAME" || -z "$APP_NAME" || -z "$COMPONENT_NAME" || -z "$VERSION" || -z "$ACCESS_KEY" || -z "$SECRET_KEY" || -z "$REGION" || -z "$BRANCH" ]]; then
   echo "Error: Missing required inputs."
   exit 1
 fi
@@ -105,7 +105,7 @@ hcloud CAE ExecuteAction \
   --spec.source.type="code" \
   --spec.source.sub_type="GitHub" \
   --spec.source.url="$URL" \
-  --spec.source.code.branch="main" \
+  --spec.source.code.branch="$BRANCH" \
   --spec.source.code.auth_name="$AUTH_NAME" \
   --spec.source.code.namespace="$NAMESPACE"
 
@@ -120,6 +120,7 @@ unset ENVIRONMENT_NAME
 unset APP_NAME
 unset COMPONENT_NAME
 unset VERSION
+unset BRANCH
 history -c
 rm -f /home/runner/entrypoint.sh
 
